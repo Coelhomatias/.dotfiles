@@ -97,6 +97,15 @@ eval $(thefuck --alias)
 eval $(thefuck --alias fk)
 
 
+alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+alias discord="discord --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+alias obsidian="obsidian --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+# alias skypeforlinux="skypeforlinux --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+# alias teams-for-linux="teams-for-linux --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+# alias teams-for-linux-wayland-hook="teams-for-linux-wayland-hook --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/coelhomatias/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

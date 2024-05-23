@@ -21,6 +21,7 @@ App.config({
     //     setupDateMenu()
     //     init()
     // },
+    icons: "./assets",
     closeWindowDelay: {
         "launcher": options.transition.value,
         "overview": options.transition.value,

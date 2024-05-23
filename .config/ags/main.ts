@@ -4,6 +4,7 @@
 import options from "options"
 // import Bar from "widget/bar/Bar"
 import Launcher from "widget/launcher/Launcher"
+import Bar from "widget/bar/Bar"
 // import NotificationPopups from "widget/notifications/NotificationPopups"
 // import OSD from "widget/osd/OSD"
 // import Overview from "widget/overview/Overview"
@@ -29,7 +30,7 @@ App.config({
         "datemenu": options.transition.value,
     },
     windows: () => [
-        // ...forMonitors(Bar),
+        ...forMonitors(Bar),
         // ...forMonitors(NotificationPopups),
         // ...forMonitors(ScreenCorners),
         // ...forMonitors(OSD),

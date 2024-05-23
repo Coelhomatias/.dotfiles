@@ -12,7 +12,7 @@ import Bar from "widget/bar/Bar"
 // import ScreenCorners from "widget/bar/ScreenCorners"
 // import SettingsDialog from "widget/settings/SettingsDialog"
 // import Verification from "widget/powermenu/Verification"
-// import { forMonitors } from "lib/utils"
+import { forMonitors } from "lib/utils"
 // import { setupQuickSettings } from "widget/quicksettings/QuickSettings"
 // import { setupDateMenu } from "widget/datemenu/DateMenu"
 

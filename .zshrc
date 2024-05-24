@@ -92,10 +92,6 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-# thefuck alias
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
-
 
 alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
 alias discord="discord --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"

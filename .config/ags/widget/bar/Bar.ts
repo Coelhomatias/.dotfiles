@@ -1,5 +1,3 @@
-import { clock } from "lib/variables"
-import options from "options"
 import Date from "./buttons/Date"
 
 const Bar = (monitor: number) => Widget.Window({

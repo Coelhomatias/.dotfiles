@@ -10,7 +10,7 @@ const Date = () => PanelButton({
     on_clicked: action.bind(),
     child: Widget.Label({
         justification: "center",
-        label: time.bind(),
+        label: time.bind().as((f) => ` ${f}`),
     }),
 })
 

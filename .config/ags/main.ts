@@ -9,7 +9,7 @@ import Bar from "widgets/bar/Bar";
 // import OSD from "widget/osd/OSD"
 // import Overview from "widget/overview/Overview"
 // import PowerMenu from "widget/powermenu/PowerMenu"
-// import ScreenCorners from "widget/bar/ScreenCorners"
+import ScreenCorners from "widgets/bar/ScreenCorners";
 // import SettingsDialog from "widget/settings/SettingsDialog"
 // import Verification from "widget/powermenu/Verification"
 import { forMonitors } from "lib/utils";
@@ -32,7 +32,7 @@ App.config({
   windows: () => [
     ...forMonitors(Bar),
     // ...forMonitors(NotificationPopups),
-    // ...forMonitors(ScreenCorners),
+    ...forMonitors(ScreenCorners),
     // ...forMonitors(OSD),
     Launcher(),
     // Overview(),

@@ -55,16 +55,17 @@ $icon-size: 1rem;
 // Spacing
 $bar-padding: 5rem 5rem;
 $bar-spacing: 0.75rem;
-$bar-item-padding: 0.5rem 1rem;
+$bar-item-padding: 0.25rem 0.75rem;
 $bar-item-spacing: 0.75rem;
 $icon-spacing: 0.5rem;
-$spacing: 12px;
+$spacing: 0.75rem;
 
 // Border
 $radius: 1rem;
+$corner-radius: 2rem;
 $border-color: transparentize($surface-0, 0.06);
 $border-radius: $radius;
-$border-width: 1px;
+$border-width: 0rem;
 $border: $border-width solid $border-color;
 
 // Theming
@@ -73,7 +74,7 @@ $transition: 200ms;
 $shadows: true;
 
 $active-gradient: linear-gradient(to right, $base, $crust);
-$shadow-color: transparentize($crust, 0.6);
+$shadow-color: transparentize($crust, 0.1);
 $text-shadow: 2pt 2pt 2pt $shadow-color;
 $box-shadow: 2pt 2pt 2pt 0 $border-color,
   inset 0 0 0 $border-width $border-color;
@@ -84,3 +85,5 @@ $popover-padding: 1rem 2rem;
 $popover-radius: $radius + popover-padding;
 
 // Etc...
+$hyprland-outer-gap: 1rem;
+$hyprland-radius: 1rem;

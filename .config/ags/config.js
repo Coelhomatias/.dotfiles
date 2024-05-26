@@ -23,7 +23,7 @@ try {
     
         // reload function
         function() {
-            Utils.exec(`sassc ${scss} ${cssdir}`)
+            Utils.exec(`sass ${scss} ${cssdir}`)
             App.resetCss()
             App.applyCss(cssdir)
         },

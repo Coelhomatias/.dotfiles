@@ -1,5 +1,5 @@
 import { type Binding } from "lib/utils"
-import PopupWindow, { Padding } from "widget/PopupWindow"
+import PopupWindow, { Padding } from "widgets/PopupWindow"
 import icons from "lib/icons"
 import options from "options"
 

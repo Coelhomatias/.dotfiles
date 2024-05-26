@@ -68,17 +68,17 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
         corners: opt(true),
         transparent: opt(false),
         layout: {
-            start: opt<Array<import("widget/bar/Bar").BarWidget>>([
+            start: opt<Array<import("widgets/bar/Bar").BarWidget>>([
                 "launcher",
                 "workspaces",
                 "taskbar",
                 "expander",
                 "messages",
             ]),
-            center: opt<Array<import("widget/bar/Bar").BarWidget>>([
+            center: opt<Array<import("widgets/bar/Bar").BarWidget>>([
                 "date",
             ]),
-            end: opt<Array<import("widget/bar/Bar").BarWidget>>([
+            end: opt<Array<import("widgets/bar/Bar").BarWidget>>([
                 "media",
                 "expander",
                 "systray",

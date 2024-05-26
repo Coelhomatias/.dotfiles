@@ -20,6 +20,7 @@ const QuickAppButton = (app: Application) => Widget.Button({
     }),
 })
 
+
 const AppItem = (app: Application) => {
     const title = Widget.Label({
         class_name: "title",

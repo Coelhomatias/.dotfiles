@@ -5,4 +5,10 @@
 @import "mixins/button.scss";
 
 // Widgets
-@import "widgets/bar.scss"
+@import "widgets/common.scss";
+@import "widgets/bar.scss";
+
+* {
+  font-size: $font-size;
+  font-family: $font-name;
+}

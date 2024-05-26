@@ -1,10 +1,10 @@
 // import "lib/session"
 // import "style/style"
 // import init from "lib/init"
-import options from "options"
+import options from "options";
 // import Bar from "widget/bar/Bar"
-import Launcher from "widgets/launcher/Launcher"
-import Bar from "widgets/bar/Bar"
+import Launcher from "widgets/launcher/Launcher";
+import Bar from "widgets/bar/Bar";
 // import NotificationPopups from "widget/notifications/NotificationPopups"
 // import OSD from "widget/osd/OSD"
 // import Overview from "widget/overview/Overview"
@@ -12,32 +12,32 @@ import Bar from "widgets/bar/Bar"
 // import ScreenCorners from "widget/bar/ScreenCorners"
 // import SettingsDialog from "widget/settings/SettingsDialog"
 // import Verification from "widget/powermenu/Verification"
-import { forMonitors } from "lib/utils"
+import { forMonitors } from "lib/utils";
 // import { setupQuickSettings } from "widget/quicksettings/QuickSettings"
 // import { setupDateMenu } from "widget/datemenu/DateMenu"
 
 App.config({
-    // onConfigParsed: () => {
-    //     setupQuickSettings()
-    //     setupDateMenu()
-    //     init()
-    // },
-    icons: "./assets",
-    closeWindowDelay: {
-        "launcher": options.transition.value,
-        "overview": options.transition.value,
-        "quicksettings": options.transition.value,
-        "datemenu": options.transition.value,
-    },
-    windows: () => [
-        ...forMonitors(Bar),
-        // ...forMonitors(NotificationPopups),
-        // ...forMonitors(ScreenCorners),
-        // ...forMonitors(OSD),
-        Launcher(),
-        // Overview(),
-        // PowerMenu(),
-        // SettingsDialog(),
-        // Verification(),
-    ],
-})
+  // onConfigParsed: () => {
+  //     setupQuickSettings()
+  //     setupDateMenu()
+  //     init()
+  // },
+  icons: "./assets",
+  closeWindowDelay: {
+    launcher: options.transition.value,
+    overview: options.transition.value,
+    quicksettings: options.transition.value,
+    datemenu: options.transition.value,
+  },
+  windows: () => [
+    ...forMonitors(Bar),
+    // ...forMonitors(NotificationPopups),
+    // ...forMonitors(ScreenCorners),
+    // ...forMonitors(OSD),
+    Launcher(),
+    // Overview(),
+    // PowerMenu(),
+    // SettingsDialog(),
+    // Verification(),
+  ],
+});

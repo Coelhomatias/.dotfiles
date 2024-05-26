@@ -24,6 +24,7 @@ function Item(bin: string) {
     )
 }
 
+
 export function Icon() {
     const icon = Widget.Icon({
         icon: icons.app.terminal,

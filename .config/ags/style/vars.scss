@@ -30,9 +30,9 @@ $mantle: #181825;
 $crust: #11111b;
 
 // Color Variables
-$blur: 0;
+$blur: 0.1;
 
-$bg: transparentize($base, $blur);
+$bg: transparentize($crust, $blur);
 $fg: $text;
 
 $primary-bg: $base;
@@ -41,23 +41,28 @@ $primary-fg: $text;
 $error-bg: $red;
 $error-fg: $text;
 
-$hover-bg: $mantle;
-$widget-bg: $mantle;
+$hover-bg: $red;
+$widget-bg: $base;
 
 /************************************
 **************GENERAL****************
 ************************************/
 // Font
-$font-name: 'JuliaMono Nerd Font Mono';
-$font-size: 12px;
+$font-name: "JuliaMono Nerd Font Mono";
+$font-size: 0.75rem;
+$icon-size: 1rem;
 
 // Spacing
-$padding: 8px;
+$bar-padding: 5rem 5rem;
+$bar-spacing: 0.75rem;
+$bar-item-padding: 0.5rem 1rem;
+$bar-item-spacing: 0.75rem;
+$icon-spacing: 0.5rem;
 $spacing: 12px;
 
 // Border
-$radius: 99px;
-$border-color: transparentize($crust, 0.1);
+$radius: 1rem;
+$border-color: transparentize($surface-0, 0.06);
 $border-radius: $radius;
 $border-width: 1px;
 $border: $border-width solid $border-color;
@@ -70,12 +75,12 @@ $shadows: true;
 $active-gradient: linear-gradient(to right, $base, $crust);
 $shadow-color: transparentize($crust, 0.6);
 $text-shadow: 2pt 2pt 2pt $shadow-color;
-$box-shadow: 2pt 2pt 2pt 0 $border-color, inset 0 0 0 $border-width $border-color;
+$box-shadow: 2pt 2pt 2pt 0 $border-color,
+  inset 0 0 0 $border-width $border-color;
 
 // Popover
 $popover-border-color: $border-color;
-$popover-padding: $padding * 1.6;
+$popover-padding: 1rem 2rem;
 $popover-radius: $radius + popover-padding;
 
 // Etc...
-

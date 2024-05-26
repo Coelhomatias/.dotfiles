@@ -1,29 +1,27 @@
-
-
 .bar {
+  transition: $transition;
+  background-color: $bg;
+  padding: $bar-padding;
+  
+
+  .bar-item {
+    padding: $bar-item-padding;
+    // margin: $spacing;
+    border-radius: 99rem;
+    border: $border;
+    background-color: $widget-bg;
     transition: $transition;
-    background-color: $bg;
 
-    .icon {
-        color: $fg;
+    // >*:not(:last-child) {
+    //     margin-right: 0.5rem;
+    // }
+
+    &:hover {
+      background-color: $hover-bg;
     }
 
-    .bar-item {
-        padding: $padding;
-        // margin: $spacing;
-        border-radius: $radius;
-        border: $border;
-        background-color: $widget-bg;
-        transition: $transition;
-
-        &:hover {
-            background-color: $hover-bg;
-        }
-
-        .bar-item-text {
-            color: $fg;
-        }
+    .date {
+      color: $fg;
     }
-
-
+  }
 }

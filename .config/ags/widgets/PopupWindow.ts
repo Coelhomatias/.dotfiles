@@ -25,6 +25,7 @@ export const Padding = (name: string, {
     setup: w => w.on("button-press-event", () => App.toggleWindow(name)),
 })
 
+
 const PopupRevealer = (
     name: string,
     child: Child,

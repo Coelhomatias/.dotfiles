@@ -101,7 +101,7 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
             action: opt(() => App.toggleWindow("launcher")),
         },
         date: {
-            format: opt("d% a% - H%:M%"),
+            format: opt("%d %a - %H:%M"),
             action: opt(() => App.toggleWindow("datemenu")),
         },
         battery: {

@@ -2,24 +2,30 @@
   transition: $transition;
   background-color: $bg;
 
-  .bar-item {
-    padding: $bar-item-padding;
-    // margin: $spacing;
-    border-radius: 99rem;
-    border: $border;
-    background-color: $widget-bg;
-    transition: $transition;
+  .bar-container {
+    min-width: 2px;
+    min-height: 2px;
+    padding: $bar-padding;
 
-    // >*:not(:last-child) {
-    //     margin-right: 0.5rem;
-    // }
+    .bar-item {
+      padding: $bar-item-padding;
+      // margin: $spacing;
+      border-radius: 99rem;
+      border: $border;
+      background-color: $widget-bg;
+      transition: $transition;
 
-    &:hover {
-      background-color: $hover-bg;
-    }
+      // >*:not(:last-child) {
+      //     margin-right: 0.5rem;
+      // }
 
-    .date {
-      color: $fg;
+      &:hover {
+        background-color: $hover-bg;
+      }
+
+      .date {
+        color: $fg;
+      }
     }
   }
 }

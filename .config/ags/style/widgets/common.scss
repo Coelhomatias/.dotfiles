@@ -1,4 +1,7 @@
 .icon {
   font-size: $icon-size;
-  margin-right: $icon-spacing;
+
+  &.with-text {
+    margin-right: $icon-spacing;
+  }
 }

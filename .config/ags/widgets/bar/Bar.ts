@@ -1,4 +1,5 @@
 import Date from "./buttons/Date";
+import Battery from "./buttons/Battery";
 
 const Bar = (monitor: number) =>
   Widget.Window({
@@ -11,6 +12,7 @@ const Bar = (monitor: number) =>
 
     child: Widget.CenterBox({
       css: "min-width: 2px; min-height: 2px;",
+      class_name: "bar-container",
       startWidget: Widget.Box({
         child: Date(),
       }),
@@ -19,7 +21,7 @@ const Bar = (monitor: number) =>
       }),
       endWidget: Widget.Box({
         hpack: "end",
-        child: Date(),
+        child: Battery(),
       }),
     }),
   });

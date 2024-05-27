@@ -1,16 +1,9 @@
 import { clock } from "lib/variables";
-import PanelButton from "widgets/bar/buttons/PanelButton";
+import Icon from "widgets/common/Icon";
 import options from "options";
 
-const { format, action } = options.bar.date;
+const { format } = options.bar.date;
 const time = Utils.derive([clock, format], (c, f) => c.format(f) || "");
-
-const NerdIcon = () =>
-  Widget.Label({
-    justification: "center",
-    label: "",
-    class_name: "icon",
-  });
 
 const DateLabel = () =>
   Widget.Label({
@@ -21,7 +14,7 @@ const DateLabel = () =>
 const Date = () =>
   Widget.Box({
     class_name: "bar-item date",
-    children: [NerdIcon(), DateLabel()],
+    children: [Icon(""), DateLabel()],
   });
 
 export default Date;

@@ -14,7 +14,7 @@ const DateLabel = () =>
 const Date = () =>
   Widget.Box({
     class_name: "bar-item date",
-    children: [Icon(""), DateLabel()],
+    children: [Icon("󰃰"), DateLabel()],
   });
 
 export default Date;

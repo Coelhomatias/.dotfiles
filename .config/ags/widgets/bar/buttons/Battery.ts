@@ -20,7 +20,7 @@ const Battery = () => {
   const zeroPad = (num, places) => String(num).padStart(places, "0");
 
   const BatteryIcon = Widget.Label({
-    class_name: "icon",
+    class_name: "icon with-text",
   }).hook(
     battery,
     (self) => {
@@ -28,14 +28,18 @@ const Battery = () => {
         ? battery.charging
           ? battery_charging
           : battery_discharge[Math.floor(battery.percent / 10)]
-        : battery_off;
+        : battery_discharge[Math.floor(63 / 10)];
     },
     "changed"
   );
 
   const BatteryLabel = Widget.Label().hook(
     battery,
-    (self) => (battery.available ? `${zeroPad(battery.percent, 2)}%` : "N/A"),
+    (self) => {
+      self.label = battery.available
+        ? `${zeroPad(battery.percent, 2)}%`
+        : "N/A";
+    },
     "changed"
   );
 

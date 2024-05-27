@@ -50,6 +50,9 @@ export async function sh(cmd: string | string[]) {
   });
 }
 
+export const zeroPad = (num: number, places: number) =>
+  String(num).padStart(places, "0");
+
 export function forMonitors(widget: (monitor: number) => Gtk.Window) {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
   return range(n, 0).flatMap(widget);

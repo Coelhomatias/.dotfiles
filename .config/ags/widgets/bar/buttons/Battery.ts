@@ -1,3 +1,4 @@
+import { zeroPad } from "lib/utils";
 const battery = await Service.import("battery");
 
 const battery_off = "󱉞";
@@ -17,8 +18,6 @@ const battery_discharge = [
 const battery_charging = "󰂄";
 
 const Battery = () => {
-  const zeroPad = (num, places) => String(num).padStart(places, "0");
-
   const BatteryIcon = Widget.Label({
     class_name: "icon with-text",
   }).hook(
@@ -28,7 +27,7 @@ const Battery = () => {
         ? battery.charging
           ? battery_charging
           : battery_discharge[Math.floor(battery.percent / 10)]
-        : battery_discharge[Math.floor(63 / 10)];
+        : battery_off;
     },
     "changed"
   );

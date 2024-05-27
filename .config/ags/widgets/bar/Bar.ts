@@ -8,8 +8,17 @@ const Bar = (monitor: number) =>
     margins: [0, 0],
     exclusivity: "exclusive",
     anchor: ["top", "left", "right"],
+
     child: Widget.CenterBox({
+      css: "min-width: 2px; min-height: 2px;",
+      startWidget: Widget.Box({
+        child: Date(),
+      }),
+      centerWidget: Widget.Box({
+        child: Date(),
+      }),
       endWidget: Widget.Box({
+        hpack: "end",
         child: Date(),
       }),
     }),

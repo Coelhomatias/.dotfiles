@@ -32,7 +32,7 @@ $crust: #11111b;
 // Color Variables
 $blur: 0.1;
 
-$bg: transparentize($crust, $blur);
+$bg: transparentize($base, $blur);
 $fg: $text;
 
 $primary-bg: $base;
@@ -42,7 +42,7 @@ $error-bg: $red;
 $error-fg: $text;
 
 $hover-bg: $red;
-$widget-bg: $base;
+$widget-bg: $surface-0;
 
 /************************************
 **************GENERAL****************
@@ -63,9 +63,9 @@ $spacing: 0.75rem;
 // Border
 $radius: 1rem;
 $corner-radius: 2rem;
-$border-color: transparentize($surface-0, 0.06);
+$border-color: transparentize($surface-1, 0.06);
 $border-radius: $radius;
-$border-width: 0rem;
+$border-width: 0px;
 $border: $border-width solid $border-color;
 
 // Theming

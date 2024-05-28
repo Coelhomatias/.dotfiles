@@ -86,6 +86,10 @@ export default {
       Hybrid: "controller-symbolic",
     },
   },
+  calendar: {
+    time: "custom-clock-symbolic",
+    calendar: "custom-calendar-symbolic",
+  },
   battery: {
     charging: "battery-flash-symbolic",
     warning: "battery-empty-symbolic",

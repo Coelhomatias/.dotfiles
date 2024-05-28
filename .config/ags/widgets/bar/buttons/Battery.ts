@@ -1,4 +1,5 @@
 import { zeroPad } from "lib/utils";
+import icons from "lib/icons"
 const battery = await Service.import("battery");
 
 const battery_off = "󱉞";

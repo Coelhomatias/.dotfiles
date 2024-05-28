@@ -1,4 +1,5 @@
 import { zeroPad } from "lib/utils";
+import icons from "lib/icons";
 const audio = await Service.import("audio");
 
 const icon = {

@@ -1,9 +1,14 @@
 import { clock } from "lib/variables";
-import Icon from "widgets/common/Icon";
-import options from "options";
+import icons from "lib/icons";
 
-const { format } = options.bar.date;
+const format = Variable("%d %a %H:%M");
 const time = Utils.derive([clock, format], (c, f) => c.format(f) || "");
+
+const DateIcon = () =>
+  Widget.Icon({
+    class_name: "icon with-text",
+    icon: icons.calendar.time,
+  });
 
 const DateLabel = () =>
   Widget.Label({
@@ -14,7 +19,7 @@ const DateLabel = () =>
 const Date = () =>
   Widget.Box({
     class_name: "bar-item date",
-    children: [Icon("󰃰"), DateLabel()],
+    children: [DateIcon(), DateLabel()],
   });
 
 export default Date;

@@ -1,51 +1,32 @@
 import { zeroPad } from "lib/utils";
-import icons from "lib/icons"
+import icons from "lib/icons";
 const battery = await Service.import("battery");
 
-const battery_off = "󱉞";
-const battery_discharge = [
-  "󰁺",
-  "󰁻",
-  "󰁼",
-  "󰁽",
-  "󰁾",
-  "󰁿",
-  "󰂀",
-  "󰂁",
-  "󰂂",
-  "󰁹",
-  "󰁹",
-];
-const battery_charging = "󰂄";
+const BatteryIcon = () =>
+  Widget.Icon({
+    class_name: "icon with-text",
+    setup: (self) =>
+      self.hook(battery, () => {
+        self.icon =
+          battery.charging || battery.charged
+            ? icons.battery.charging
+            : battery.icon_name;
+      }),
+  });
+
+const BatteryLabel = () =>
+  Widget.Label({
+    label: battery
+      .bind("percent")
+      .as((p) =>
+        battery.available ? `${zeroPad(battery.percent, 2)}%` : "N/A"
+      ),
+  });
 
 const Battery = () => {
-  const BatteryIcon = Widget.Label({
-    class_name: "icon with-text",
-  }).hook(
-    battery,
-    (self) => {
-      self.label = battery.available
-        ? battery.charging
-          ? battery_charging
-          : battery_discharge[Math.floor(battery.percent / 10)]
-        : battery_off;
-    },
-    "changed"
-  );
-
-  const BatteryLabel = Widget.Label().hook(
-    battery,
-    (self) => {
-      self.label = battery.available
-        ? `${zeroPad(battery.percent, 2)}%`
-        : "N/A";
-    },
-    "changed"
-  );
-
   return Widget.Box({
     class_name: "bar-item battery",
-    children: [BatteryIcon, BatteryLabel],
+    children: [BatteryIcon(), BatteryLabel()],
   });
 };
 

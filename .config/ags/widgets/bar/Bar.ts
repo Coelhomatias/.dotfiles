@@ -1,6 +1,7 @@
 import Date from "./buttons/Date";
 import Battery from "./buttons/Battery";
 import Volume from "./buttons/Volume";
+import Brightness from "./buttons/Brightness";
 
 const Bar = (monitor: number) =>
   Widget.Window({
@@ -21,7 +22,7 @@ const Bar = (monitor: number) =>
       }),
       endWidget: Widget.Box({
         hpack: "end",
-        children: [Volume(), Battery()],
+        children: [Volume(), Brightness(), Battery()],
       }),
     }),
   });

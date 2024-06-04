@@ -7,24 +7,21 @@
     min-height: 2px;
     padding: $bar-padding;
 
-    .bar-item {
-      padding: $bar-item-padding;
-      // margin: $spacing;
-      border-radius: 99rem;
-      border: $border;
-      background-color: $widget-bg;
-      transition: $transition;
-
-      // >*:not(:last-child) {
-      //     margin-right: 0.5rem;
-      // }
-
-      &:hover {
-        background-color: $hover-bg;
+    .bar-group {
+      > *:not(:last-child) {
+        margin-right: $bar-group-spacing;
       }
 
-      .date {
-        color: $fg;
+      .bar-group-item {
+        padding: $bar-group-item-padding;
+        border-radius: 99rem;
+        border: $border;
+        background-color: $widget-bg;
+        transition: $transition;
+
+        > *:not(:last-child) {
+          margin-right: $bar-group-item-spacing;
+        }
       }
     }
   }

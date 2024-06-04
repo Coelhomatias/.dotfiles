@@ -13,7 +13,7 @@ const SysTray = () => {
   );
 
   return Widget.Box({
-    class_name: "bar-item systray",
+    class_name: "bar-group-item systray",
     children: items,
   });
 };

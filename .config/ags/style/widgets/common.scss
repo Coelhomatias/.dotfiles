@@ -10,4 +10,11 @@ button {
   padding: 0;
   margin: 0;
   background: transparent;
+  transition: none;
+  min-height: 0;
+
+  &:hover {
+    box-shadow: none;
+    background-color: transparent;
+  }
 }

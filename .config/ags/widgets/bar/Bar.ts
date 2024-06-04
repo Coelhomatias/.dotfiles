@@ -2,6 +2,14 @@ import Date from "./buttons/Date";
 import Battery from "./buttons/Battery";
 import Volume from "./buttons/Volume";
 import Brightness from "./buttons/Brightness";
+import SysTray from "./buttons/SysTray";
+
+/* 
+direction is left -> right
+Left: Settings | Desktops | Info
+Middle: Notifications | Clock | Media (details on hover)
+Right: Systray | Controls
+*/
 
 const Bar = (monitor: number) =>
   Widget.Window({
@@ -22,7 +30,7 @@ const Bar = (monitor: number) =>
       }),
       endWidget: Widget.Box({
         hpack: "end",
-        children: [Volume(), Brightness(), Battery()],
+        children: [SysTray(), Volume(), Brightness(), Battery()],
       }),
     }),
   });

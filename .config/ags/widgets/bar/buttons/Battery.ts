@@ -23,11 +23,10 @@ const BatteryLabel = () =>
       ),
   });
 
-const Battery = () => {
-  return Widget.Box({
+const Battery = () =>
+  Widget.Box({
     class_name: "bar-item battery",
     children: [BatteryIcon(), BatteryLabel()],
   });
-};
 
 export default Battery;

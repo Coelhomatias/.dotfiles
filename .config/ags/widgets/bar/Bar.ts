@@ -6,6 +6,7 @@ import SysTray from "./buttons/SysTray";
 import SystemIndicators from "./buttons/SystemIndicators";
 import Power from "./buttons/Power";
 import Overview from "./buttons/Overview";
+import Workspaces from "./buttons/Workspaces";
 
 /* 
 direction is left -> right
@@ -13,6 +14,12 @@ Left: Overview | Workspaces | Info
 Middle: Notifications | Clock | Media (details on hover)
 Right: Systray + WiFi + BT | Controls | Power
 */
+
+const WorkspacesMenu = () =>
+  Widget.Box({
+    class_name: "bar-group-item overviewmenu",
+    child: Workspaces(7),
+  });
 
 const OverviewMenu = () =>
   Widget.Box({
@@ -46,7 +53,7 @@ const Bar = (monitor: number) =>
       class_name: "bar-container",
       startWidget: Widget.Box({
         class_name: "bar-group",
-        child: OverviewMenu(),
+        children: [OverviewMenu(), WorkspacesMenu()],
       }),
       centerWidget: Widget.Box({
         class_name: "bar-group",

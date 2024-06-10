@@ -4,6 +4,8 @@ import Volume from "./buttons/Volume";
 import Brightness from "./buttons/Brightness";
 import SysTray from "./buttons/SysTray";
 import SystemIndicators from "./buttons/SystemIndicators";
+import Power from "./buttons/Power";
+import Overview from "./buttons/Overview";
 
 /* 
 direction is left -> right
@@ -11,6 +13,18 @@ Left: Overview | Workspaces | Info
 Middle: Notifications | Clock | Media (details on hover)
 Right: Systray + WiFi + BT | Controls | Power
 */
+
+const OverviewMenu = () =>
+  Widget.Box({
+    class_name: "bar-group-item overviewmenu",
+    child: Overview(),
+  });
+
+const PowerMenu = () =>
+  Widget.Box({
+    class_name: "bar-group-item powermenu",
+    child: Power(),
+  });
 
 const Controls = () =>
   Widget.Box({
@@ -32,7 +46,7 @@ const Bar = (monitor: number) =>
       class_name: "bar-container",
       startWidget: Widget.Box({
         class_name: "bar-group",
-        child: Date(),
+        child: OverviewMenu(),
       }),
       centerWidget: Widget.Box({
         class_name: "bar-group",
@@ -41,7 +55,7 @@ const Bar = (monitor: number) =>
       endWidget: Widget.Box({
         class_name: "bar-group",
         hpack: "end",
-        children: [SysTray(), Controls(), SystemIndicators()],
+        children: [SysTray(), Controls(), PowerMenu()],
       }),
     }),
   });

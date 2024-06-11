@@ -1,43 +1,40 @@
-import Date from "./buttons/Date";
-import Battery from "./buttons/Battery";
-import Volume from "./buttons/Volume";
-import Brightness from "./buttons/Brightness";
-import SysTray from "./buttons/SysTray";
-import SystemIndicators from "./buttons/SystemIndicators";
-import Power from "./buttons/Power";
-import Overview from "./buttons/Overview";
-import Workspaces from "./buttons/Workspaces";
+import { BoxProps } from "types/widgets/box";
+import options from "options";
+import OverviewButton from "./buttons/overview/OverviewButton";
+import Workspaces from "./buttons/workspaces/Workspaces";
+import DateButton from "./buttons/date/DateButton";
+import SystemTray from "./buttons/tray/SystemTray";
+import ButtonGroup from "./buttons/ButtonGroup";
+import VolumeButton from "./buttons/volume/VolumeButton";
+import BrightnessButton from "./buttons/brightness/BrightnessButton";
+import BatteryButton from "./buttons/battery/BatteryButton";
+import PowerButton from "./buttons/power/PowerButton";
 
-/* 
-direction is left -> right
-Left: Overview | Workspaces | Info
-Middle: Notifications | Clock | Media (details on hover)
-Right: Systray + WiFi + BT | Controls | Power
-*/
-
-const WorkspacesMenu = () =>
+const BarGroup = ({ class_name, ...rest }: BoxProps) =>
   Widget.Box({
-    class_name: "bar-group-item overviewmenu",
-    child: Workspaces(7),
+    class_name: "bar-group",
+    ...rest,
   });
 
-const OverviewMenu = () =>
-  Widget.Box({
-    class_name: "bar-group-item overviewmenu",
-    child: Overview(),
+const StartWidget = () =>
+  BarGroup({
+    children: [OverviewButton(), Workspaces(7)],
   });
 
-const PowerMenu = () =>
-  Widget.Box({
-    class_name: "bar-group-item powermenu",
-    child: Power(),
+const CenterWidget = () =>
+  BarGroup({
+    children: [DateButton()],
   });
 
-const Controls = () =>
-  Widget.Box({
-    class_name: "bar-group-item controls",
-    hpack: "end",
-    children: [Volume(), Brightness(), Battery()],
+const EndWidget = () =>
+  BarGroup({
+    children: [
+      SystemTray(),
+      ButtonGroup({
+        children: [VolumeButton(), BrightnessButton(), BatteryButton()],
+      }),
+      PowerButton(),
+    ],
   });
 
 const Bar = (monitor: number) =>
@@ -51,19 +48,9 @@ const Bar = (monitor: number) =>
 
     child: Widget.CenterBox({
       class_name: "bar-container",
-      startWidget: Widget.Box({
-        class_name: "bar-group",
-        children: [OverviewMenu(), WorkspacesMenu()],
-      }),
-      centerWidget: Widget.Box({
-        class_name: "bar-group",
-        child: Date(),
-      }),
-      endWidget: Widget.Box({
-        class_name: "bar-group",
-        hpack: "end",
-        children: [SysTray(), Controls(), PowerMenu()],
-      }),
+      startWidget: StartWidget(),
+      centerWidget: CenterWidget(),
+      endWidget: EndWidget(),
     }),
   });
 

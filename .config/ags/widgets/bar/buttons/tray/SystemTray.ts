@@ -1,6 +1,8 @@
+import ButtonGroup from "../ButtonGroup";
+
 const systemtray = await Service.import("systemtray");
 
-const SysTray = () => {
+const SystemTray = () => {
   const items = systemtray.bind("items").as((items) =>
     items.map((item) =>
       Widget.Button({
@@ -12,10 +14,9 @@ const SysTray = () => {
     )
   );
 
-  return Widget.Box({
-    class_name: "bar-group-item systray",
+  return ButtonGroup({
     children: items,
   });
 };
 
-export default SysTray;
+export default SystemTray;

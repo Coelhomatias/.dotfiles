@@ -28,6 +28,7 @@ const CenterWidget = () =>
 
 const EndWidget = () =>
   BarGroup({
+    hpack: "end",
     children: [
       SystemTray(),
       ButtonGroup({

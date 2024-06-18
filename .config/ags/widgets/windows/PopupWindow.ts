@@ -7,55 +7,30 @@ import options from "options";
 type Transition = RevealerProps["transition"];
 type Child = WindowProps["child"];
 
-export const Padding = (
-  name: string,
-  { css = "", hexpand = true, vexpand = true }: EventBoxProps = {}
-) =>
-  Widget.EventBox({
-    hexpand,
-    vexpand,
-    can_focus: false,
-    child: Widget.Box({ css }),
-    setup: (w) => w.on("button-press-event", () => App.toggleWindow(name)),
+const Overlay = (name: string, child: Child) =>
+  Widget.Overlay({
+    child: Widget.EventBox({
+      class_name: "overlay-container",
+      hexpand: true,
+      vexpand: true,
+      css: "background-color: rgba(0, 0, 0, 0.5);",
+      can_focus: false,
+      setup: (box) => {
+        box.on("button-press-event", () => App.toggleWindow(name));
+      },
+    }),
+    overlay: child,
   });
-
-const PopupRevealer = (
-  name: string,
-  child: Child,
-  transition: Transition = "slide_down"
-) =>
-  Widget.Box(
-    { css: "padding: 1px;" },
-    Widget.Revealer({
-      transition,
-      child: Widget.Box({
-        class_name: "window-content",
-        child,
-      }),
-      transitionDuration: options.transition.bind(),
-      setup: (self) =>
-        self.hook(App, (_, wname, visible) => {
-          if (wname === name) self.reveal_child = visible;
-        }),
-    })
-  );
 
 const PopupWindow = (name: string, child: Child) =>
   Widget.Window({
     name,
+    visible: false,
     class_name: "popup-window",
-    exclusivity: "ignore",
+    layer: "top",
+    keymode: "on-demand",
     anchor: ["top", "bottom", "left", "right"],
-    child: Widget.Box({
-      class_name: "popup-window-container",
-      children: [
-        Widget.Box({
-          hexpand: false,
-          vertical: true,
-          children: [Padding(name), PopupRevealer(name, child)],
-        }),
-      ],
-    }),
+    child: Overlay(name, child),
   });
 
 export default PopupWindow;

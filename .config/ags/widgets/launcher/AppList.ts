@@ -1,10 +1,14 @@
 import { type Application } from "types/service/applications";
-import { icon, launchApp } from "lib/utils";
+import { icon } from "lib/utils";
 import options from "options";
 import icons from "lib/icons";
 import { Variable } from "types/variable";
+import { newSearch } from "lib/search";
+import { type FlowBoxChild } from "types/@girs/gtk-3.0/gtk-3.0.cjs";
 
 const { iconSize } = options.launcher.apps;
+const apps = await Service.import("applications");
+const { query } = apps;
 
 const FavoriteItem = (app: Application) =>
   Widget.Button({
@@ -59,6 +63,7 @@ const AppItem = (app: Application) => {
   return Widget.Button({
     class_name: "app-item",
     attribute: { app },
+    hexpand: true,
     child: Widget.Box({
       children: [AppItemIcon, AppItemTextBox],
     }),
@@ -69,60 +74,63 @@ const AppItem = (app: Application) => {
   });
 };
 
-const AppList = (
-  initialList: Variable<Application[]>,
-  list: Variable<Application[]>
-) => {
+const AppList = (list: Variable<Map<Application, number>>) => {
   const SeparetedAppListItem = (app: Application) => {
-    return Widget.Box({ vertical: true }, Widget.Separator(), AppItem(app));
+    return Widget.Box(
+      { vertical: true, attribute: { app } },
+      Widget.Separator(),
+      AppItem(app)
+    );
   };
 
-  const checkIfInList = (app: Application) => {
-    return list.value.some((a) => a.name === app.name);
+  const filterFunc = (item: FlowBoxChild) => {
+    const appWidget = item.get_child() as ReturnType<
+      typeof SeparetedAppListItem
+    >;
+
+    if (!appWidget) return false;
+
+    return list.value.has(appWidget.attribute.app);
   };
+
+  const sortFunc = (a: FlowBoxChild, b: FlowBoxChild) => {
+    const appA = (a.get_child() as ReturnType<typeof SeparetedAppListItem>)
+      .attribute.app;
+    const appB = (b.get_child() as ReturnType<typeof SeparetedAppListItem>)
+      .attribute.app;
+
+    return list.value.get(appA)! - list.value.get(appB)!;
+  };
+
+  const appFlowBox = Widget.FlowBox({
+    class_name: "app-list",
+    vexpand: true,
+    setup: (self) => {
+      self.hook(
+        apps,
+        (self) =>
+          query("").map((app) => self.insert(SeparetedAppListItem(app), -1)),
+        "notify::frequents"
+      );
+      self.set_sort_func(sortFunc);
+      self.set_filter_func(filterFunc);
+      self.hook(
+        list,
+        () => {
+          self.invalidate_filter();
+          self.invalidate_sort();
+        },
+        "changed"
+      );
+    },
+  });
 
   return Widget.Scrollable({
     class_name: "app-list",
     hscroll: "never",
     vscroll: "always",
     css: "min-height: 300px; min-width: 600px;",
-    child: Widget.Box({
-      class_name: "app-list",
-      vertical: true,
-      children: list.bind().as((l) => l.map(SeparetedAppListItem)),
-      //   setup: (self) =>
-      //     self.hook(
-      //       list,
-      //       (self) => {
-      //         const listIndexMap = new Map();
-      //         list.value.forEach((item, index) => {
-      //           listIndexMap.set(item.name, index);
-      //         });
-
-      //         let needSorting: (typeof self.children)[0][] = [];
-      //         let noNeedSorting: (typeof self.children)[0][] = [];
-
-      //         self.children.forEach((child) => {
-      //           if (checkIfInList(child.attribute.app)) {
-      //             child.reveal_child = true;
-      //             needSorting.push(child);
-      //           } else {
-      //             child.reveal_child = false;
-      //             noNeedSorting.push(child);
-      //           }
-      //         });
-
-      //         needSorting.sort(
-      //           (a, b) =>
-      //             listIndexMap.get(a.attribute.app.name) -
-      //             listIndexMap.get(b.attribute.app.name)
-      //         );
-
-      //         self.children = [...needSorting, ...noNeedSorting];
-      //       },
-      //       "changed"
-      //     ),
-    }),
+    child: appFlowBox,
   });
 };
 

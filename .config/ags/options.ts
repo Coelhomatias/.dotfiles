@@ -18,7 +18,7 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
       max: opt(16),
     },
     apps: {
-      iconSize: opt(62),
+      iconSize: opt(32),
       max: opt(6),
       favorites: opt([
         ["firefox", "foot", "code", "thunar", "obsidean", "discord"],

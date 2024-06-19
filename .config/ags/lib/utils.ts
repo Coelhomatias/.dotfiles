@@ -117,3 +117,94 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
   widget.draw(cr);
   return surface;
 }
+
+export function arrayToMap<T, K extends keyof T, V extends keyof T>(
+  array: T[],
+  key: K,
+  value: V
+): Map<T[K], T[V]>;
+
+export function arrayToMap<T, V extends keyof T>(
+  array: T[],
+  key: undefined,
+  value: V,
+  useIndex: "key"
+): Map<number, T[V]>;
+
+export function arrayToMap<T, K extends keyof T>(
+  array: T[],
+  key: K,
+  value: undefined,
+  useIndex: "value"
+): Map<T[K], number>;
+
+export function arrayToMap<T>(
+  array: T[],
+  key: undefined,
+  value: undefined,
+  useIndex: "value"
+): Map<T, number>;
+
+export function arrayToMap<T>(
+  array: T[],
+  key: undefined,
+  value: undefined,
+  useIndex: "key"
+): Map<number, T>;
+
+/**
+ * @returns Map
+ * @param array - array of objects
+ * @param key - key to use as map key
+ * @param value - key to use as map value
+ * @param useIndex - use index as key or value
+ */
+
+export function arrayToMap<T, K extends keyof T, V extends keyof T>(
+  array: T[],
+  key?: K,
+  value?: V,
+  useIndex?: "key" | "value"
+): Map<T[K] | number | T, T[V] | number | T> {
+  if (!useIndex) {
+    if (key === undefined || value === undefined) {
+      throw new Error(
+        "Key and value parameters must be provided if useIndex is not provided"
+      );
+    }
+    return array.reduce((map, item) => {
+      map.set(item[key], item[value]);
+      return map;
+    }, new Map<T[K], T[V]>());
+  } else if (useIndex === "key") {
+    if (value === undefined) {
+      return array.reduce((map, item, index) => {
+        map.set(index, item);
+        return map;
+      }, new Map<number, T>());
+    }
+    return array.reduce((map, item, index) => {
+      map.set(index, item[value]);
+      return map;
+    }, new Map<number, T[V]>());
+  } else if (useIndex === "value") {
+    if (key === undefined) {
+      return array.reduce((map, item, index) => {
+        map.set(item, index);
+        return map;
+      }, new Map<T, number>());
+    }
+    return array.reduce((map, item, index) => {
+      map.set(item[key], index);
+      return map;
+    }, new Map<T[K], number>());
+  } else {
+    throw new Error("Invalid useIndex value");
+  }
+}
+
+const list = [
+  { index: 0, value: "zero" },
+  { index: 1, value: "one" },
+];
+const map = arrayToMap(list, "index", "value");

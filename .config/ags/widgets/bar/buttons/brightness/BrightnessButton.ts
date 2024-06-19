@@ -1,6 +1,7 @@
 import icons from "lib/icons";
 import BarButton from "widgets/bar/BarButton";
 import { zeroPad } from "lib/utils";
+
 import brightness from "service/brightness";
 
 const BrightnessIcon = () =>

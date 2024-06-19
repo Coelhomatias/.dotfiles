@@ -69,24 +69,59 @@ const AppItem = (app: Application) => {
   });
 };
 
-const AppList = (list: Variable<Application[]>) => {
+const AppList = (
+  initialList: Variable<Application[]>,
+  list: Variable<Application[]>
+) => {
   const SeparetedAppListItem = (app: Application) => {
-    return Widget.Box({
-      attribute: { app },
-      vertical: true,
-      children: [Widget.Separator(), AppItem(app)],
-    });
+    return Widget.Box({ vertical: true }, Widget.Separator(), AppItem(app));
+  };
+
+  const checkIfInList = (app: Application) => {
+    return list.value.some((a) => a.name === app.name);
   };
 
   return Widget.Scrollable({
     class_name: "app-list",
     hscroll: "never",
     vscroll: "always",
-    css: "min-height: 300px; min-width: 300px;",
+    css: "min-height: 300px; min-width: 600px;",
     child: Widget.Box({
       class_name: "app-list",
       vertical: true,
-      children: list.bind().as((list) => list.map(SeparetedAppListItem)),
+      children: list.bind().as((l) => l.map(SeparetedAppListItem)),
+      //   setup: (self) =>
+      //     self.hook(
+      //       list,
+      //       (self) => {
+      //         const listIndexMap = new Map();
+      //         list.value.forEach((item, index) => {
+      //           listIndexMap.set(item.name, index);
+      //         });
+
+      //         let needSorting: (typeof self.children)[0][] = [];
+      //         let noNeedSorting: (typeof self.children)[0][] = [];
+
+      //         self.children.forEach((child) => {
+      //           if (checkIfInList(child.attribute.app)) {
+      //             child.reveal_child = true;
+      //             needSorting.push(child);
+      //           } else {
+      //             child.reveal_child = false;
+      //             noNeedSorting.push(child);
+      //           }
+      //         });
+
+      //         needSorting.sort(
+      //           (a, b) =>
+      //             listIndexMap.get(a.attribute.app.name) -
+      //             listIndexMap.get(b.attribute.app.name)
+      //         );
+
+      //         self.children = [...needSorting, ...noNeedSorting];
+      //       },
+      //       "changed"
+      //     ),
     }),
   });
 };

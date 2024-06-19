@@ -1,5 +1,6 @@
 import { zeroPad } from "lib/utils";
 import icons from "lib/icons";
+import BarButton from "widgets/bar/BarButton";
 const battery = await Service.import("battery");
 
 const BatteryIcon = () =>
@@ -23,10 +24,12 @@ const BatteryLabel = () =>
       ),
   });
 
-const Battery = () =>
-  Widget.Box({
-    class_name: "bar-item battery",
-    children: [BatteryIcon(), BatteryLabel()],
+const BatteryButton = () =>
+  BarButton({
+    child: Widget.Box({
+      class_name: "battery",
+      children: [BatteryIcon(), BatteryLabel()],
+    }),
   });
 
-export default Battery;
+export default BatteryButton;

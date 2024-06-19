@@ -1,9 +1,11 @@
 const entry = App.configDir + "/main.ts";
 const scss = App.configDir + "/style/main.scss";
+const bunLock = App.configDir + "/bun.lockb";
 const outdir = "/tmp/ags/js";
 const cssdir = "/tmp/ags/style.css";
 
 try {
+  await Utils.execAsync(["bun", "i", "--cwd", App.configDir]);
   await Utils.execAsync([
     "bun",
     "build",

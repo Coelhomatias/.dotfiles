@@ -1,5 +1,6 @@
 import { zeroPad } from "lib/utils";
 import icons from "lib/icons";
+import BarButton from "widgets/bar/BarButton";
 const audio = await Service.import("audio");
 
 const AudioIcon = () =>
@@ -17,15 +18,17 @@ const AudioIcon = () =>
     self.class_name = "icon with-text";
   });
 
-const Volume = () =>
-  Widget.Box({
-    class_name: "bar-item volume",
-    children: [
-      AudioIcon(),
-      Widget.Label().hook(audio, (self) => {
-        self.label = `${zeroPad(Math.round(audio.speaker.volume * 100), 2)}%`;
-      }),
-    ],
+const VolumeButton = () =>
+  BarButton({
+    child: Widget.Box({
+      class_name: "volume",
+      children: [
+        AudioIcon(),
+        Widget.Label().hook(audio, (self) => {
+          self.label = `${zeroPad(Math.round(audio.speaker.volume * 100), 2)}%`;
+        }),
+      ],
+    }),
   });
 
-export default Volume;
+export default VolumeButton;

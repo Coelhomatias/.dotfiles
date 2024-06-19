@@ -141,6 +141,7 @@ export default {
     cpu: "org.gnome.SystemMonitor-symbolic",
     ram: "drive-harddisk-solidstate-symbolic",
     temp: "temperature-symbolic",
+    os: "arch-symbolic",
   },
   color: {
     dark: "dark-mode-symbolic",

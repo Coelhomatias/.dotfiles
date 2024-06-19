@@ -1,13 +1,16 @@
 // Variables
 @import "vars.scss";
 
+// Theme
+@import "theme.scss";
+
 // Mixins
-@import "mixins/button.scss";
+// @import "mixins/button.scss";
 
 // Widgets
-@import "widgets/common.scss";
-@import "widgets/bar.scss";
-@import "widgets/screencorner.scss";
+// @import "widgets/common.scss";
+// @import "widgets/bar.scss";
+// @import "widgets/screencorner.scss";
 
 * {
   font-size: $font-size;

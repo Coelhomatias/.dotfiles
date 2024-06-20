@@ -11,7 +11,7 @@ const { query } = apps;
 const Launcher = () => {
   const fuse = newSearch(query(""), { keys: ["name", "description"] });
   const appListMap = Variable(
-    arrayToMap(query(""), undefined, undefined, "value")
+    arrayToMap(query(""), "name", undefined, "value")
   );
 
   const SearchBox = () =>
@@ -20,23 +20,25 @@ const Launcher = () => {
       primary_icon_name: icons.ui.search,
       placeholder_text: "Search",
       on_accept: () => {
-        const [app] = appListMap.value.keys();
+        const [appName] = appListMap.value.keys();
         App.closeWindow("launcher");
-        app?.launch();
+        const app = query(appName)[0];
+        app.launch();
       },
       on_change: ({ text }) => {
         if (!text) {
-          appListMap.value = arrayToMap(
-            query(""),
-            undefined,
-            undefined,
-            "value"
-          );
+          appListMap.value = arrayToMap(query(""), "name", undefined, "value");
           return;
         }
         const results = fuse.search(text).map((result) => result.item);
-        appListMap.value = arrayToMap(results, undefined, undefined, "value");
+        appListMap.value = arrayToMap(results, "name", undefined, "value");
       },
+      setup: (self) =>
+        self.hook(
+          apps,
+          () => fuse.setCollection(query("")),
+          "notify::frequents"
+        ),
     });
 
   return Widget.Box({

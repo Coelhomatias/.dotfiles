@@ -3,7 +3,6 @@ import { icon } from "lib/utils";
 import options from "options";
 import icons from "lib/icons";
 import { Variable } from "types/variable";
-import { newSearch } from "lib/search";
 import { type FlowBoxChild } from "types/@girs/gtk-3.0/gtk-3.0.cjs";
 
 const { iconSize } = options.launcher.apps;
@@ -74,11 +73,15 @@ const AppItem = (app: Application) => {
   });
 };
 
-const AppList = (list: Variable<Map<Application, number>>) => {
+const AppList = (list: Variable<Map<string, number>>) => {
   const SeparetedAppListItem = (app: Application) => {
     return Widget.Box(
-      { vertical: true, attribute: { app } },
-      Widget.Separator(),
+      {
+        vertical: true,
+        attribute: { app },
+        can_focus: false,
+        css: "padding: 10px;",
+      },
       AppItem(app)
     );
   };
@@ -90,7 +93,7 @@ const AppList = (list: Variable<Map<Application, number>>) => {
 
     if (!appWidget) return false;
 
-    return list.value.has(appWidget.attribute.app);
+    return list.value.has(appWidget.attribute.app.name);
   };
 
   const sortFunc = (a: FlowBoxChild, b: FlowBoxChild) => {
@@ -99,7 +102,7 @@ const AppList = (list: Variable<Map<Application, number>>) => {
     const appB = (b.get_child() as ReturnType<typeof SeparetedAppListItem>)
       .attribute.app;
 
-    return list.value.get(appA)! - list.value.get(appB)!;
+    return list.value.get(appA.name)! - list.value.get(appB.name)!;
   };
 
   const appFlowBox = Widget.FlowBox({
@@ -108,12 +111,16 @@ const AppList = (list: Variable<Map<Application, number>>) => {
     setup: (self) => {
       self.hook(
         apps,
-        (self) =>
-          query("").map((app) => self.insert(SeparetedAppListItem(app), -1)),
+        (self) => {
+          self.get_children().forEach((child) => child.destroy());
+          query("").map((app) => self.insert(SeparetedAppListItem(app), -1));
+          self.get_children().forEach((child) => child.set_can_focus(false));
+        },
         "notify::frequents"
       );
       self.set_sort_func(sortFunc);
       self.set_filter_func(filterFunc);
+
       self.hook(
         list,
         () => {

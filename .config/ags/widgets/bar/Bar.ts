@@ -10,6 +10,14 @@ import BrightnessButton from "./buttons/brightness/BrightnessButton";
 import BatteryButton from "./buttons/battery/BatteryButton";
 import PowerButton from "./buttons/power/PowerButton";
 
+/**
+ *
+ * Left: OverviewButton, Workspaces, SystemTray
+ * Center: NotificationIndicator, DateButton, PlayerInfo
+ * Right: (ScreenRecorder, ColorPicker) (Network, Bluetooth, BTBatteryDevice) (MicrophoneIndicator, VolumeIndicator, BrightnessIndicator, BatteryIndicator), PowerButton
+ *
+ */
+
 const BarGroup = ({ class_name, ...rest }: BoxProps) =>
   Widget.Box({
     class_name: "bar-group",

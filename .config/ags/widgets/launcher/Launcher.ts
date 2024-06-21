@@ -16,7 +16,6 @@ const Launcher = () => {
 
   const SearchBox = () =>
     Widget.Entry({
-      hexpand: true,
       primary_icon_name: icons.ui.search,
       placeholder_text: "Search",
       on_accept: () => {
@@ -33,22 +32,31 @@ const Launcher = () => {
         const results = fuse.search(text).map((result) => result.item);
         appListMap.value = arrayToMap(results, "name", undefined, "value");
       },
-      setup: (self) =>
+      setup: (self) => {
         self.hook(
           apps,
           () => fuse.setCollection(query("")),
           "notify::frequents"
-        ),
+        );
+        self.hook(App, (_, wname) => {
+          if (wname === "launcher") self.grab_focus();
+        });
+      },
     });
 
   return Widget.Box({
     class_name: "launcher",
     hexpand: false,
     vertical: true,
-    halign: Gtk.Align.CENTER,
-    valign: Gtk.Align.CENTER,
+    css: "background-color: rgba(255, 255, 255, 0.2);",
     children: [SearchBox(), AppList(appListMap)],
   });
 };
 
-export default () => PopupWindow("launcher", Launcher());
+export default () =>
+  PopupWindow({
+    name: "launcher",
+    child: Launcher(),
+    layout: "center-center",
+    transition: "slide_down",
+  });

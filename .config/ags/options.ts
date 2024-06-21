@@ -4,7 +4,7 @@ import { icon } from "lib/utils";
 import icons from "lib/icons";
 
 const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
-  transition: opt(200),
+  transition: { duration: opt(250) },
   bar: {
     date: {
       format: opt("%d %a %H:%M"),
@@ -21,7 +21,7 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
       iconSize: opt(32),
       max: opt(6),
       favorites: opt([
-        ["firefox", "foot", "code", "thunar", "obsidean", "discord"],
+        ["firefox", "foot", "code", "thunar", "obsidian", "discord"],
       ]),
     },
   },

@@ -62,7 +62,7 @@ const AppItem = (app: Application) => {
   return Widget.Button({
     class_name: "app-item",
     attribute: { app },
-    hexpand: true,
+    css: "padding: 10px;",
     child: Widget.Box({
       children: [AppItemIcon, AppItemTextBox],
     }),
@@ -77,10 +77,8 @@ const AppList = (list: Variable<Map<string, number>>) => {
   const SeparetedAppListItem = (app: Application) => {
     return Widget.Box(
       {
-        vertical: true,
         attribute: { app },
         can_focus: false,
-        css: "padding: 10px;",
       },
       AppItem(app)
     );
@@ -108,6 +106,9 @@ const AppList = (list: Variable<Map<string, number>>) => {
   const appFlowBox = Widget.FlowBox({
     class_name: "app-list",
     vexpand: true,
+    max_children_per_line: 1,
+    homogeneous: false,
+    row_spacing: 2,
     setup: (self) => {
       self.hook(
         apps,
@@ -136,7 +137,7 @@ const AppList = (list: Variable<Map<string, number>>) => {
     class_name: "app-list",
     hscroll: "never",
     vscroll: "always",
-    css: "min-height: 300px; min-width: 600px;",
+    css: "min-height: 250px; min-width: 300px;",
     child: appFlowBox,
   });
 };

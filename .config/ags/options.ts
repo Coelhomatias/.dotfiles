@@ -25,6 +25,11 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
       ]),
     },
   },
+  notifications: {
+    position: opt<Array<"top" | "bottom" | "left" | "right">>(["top", "right"]),
+    blacklist: opt(["Spotify"]),
+    width: opt(440),
+  },
 });
 
 globalThis["options"] = options;

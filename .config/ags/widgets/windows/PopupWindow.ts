@@ -83,8 +83,8 @@ const PopupWindow = ({
     child: Revealer({ name, child, transition, layout }),
     ...props,
     setup: (w) => {
-      w.keybind("Escape", () => w.set_visible(false));
-      w.on("button-press-event", () => w.set_visible(false));
+      w.keybind("Escape", () => App.closeWindow(name));
+      w.on("button-press-event", () => App.closeWindow(name));
     },
   });
 

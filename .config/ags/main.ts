@@ -1,13 +1,17 @@
 import Bar from "widgets/bar/Bar";
 import Launcher from "widgets/launcher/Launcher";
 import { forMonitors } from "lib/utils";
-import NotificationWindow from "widgets/notifications/Notification";
+import NotificationPopups from "widgets/notifications/NotificationPopups";
+import options from "options";
 
 App.config({
   icons: "./assets",
+  closeWindowDelay: {
+    launcher: options.transition.duration.value,
+  },
   windows: () => [
     ...forMonitors(Bar),
+    ...forMonitors(NotificationPopups),
     Launcher(),
-    ...forMonitors(NotificationWindow),
   ],
 });

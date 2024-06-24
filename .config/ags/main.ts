@@ -1,7 +1,7 @@
 import Bar from "widgets/bar/Bar";
 import Launcher from "widgets/launcher/Launcher";
 import { forMonitors } from "lib/utils";
-import { NotificationPopups } from "widgets/notifications/Notification";
+import NotificationList from "widgets/notifications/NotificationList";
 import options from "options";
 
 App.config({
@@ -11,7 +11,7 @@ App.config({
   },
   windows: () => [
     ...forMonitors(Bar),
-    ...forMonitors(NotificationPopups),
+    ...forMonitors(NotificationList),
     Launcher(),
   ],
 });

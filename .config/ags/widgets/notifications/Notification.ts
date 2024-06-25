@@ -114,9 +114,10 @@ const NotificationItem = (notification: Notification) => {
 
   const eventBox = Widget.EventBox({
     child: Widget.Box({
-      width_request: 300,
+      width_request: options.notifications.width.value,
       vertical: true,
       css: "background-color: rgba(255, 0, 0, 0.2)",
+      class_name: "item",
       children: notificationActions
         ? [
           Widget.Box(
@@ -146,7 +147,7 @@ const NotificationItem = (notification: Notification) => {
   });
 
   const innerRevealer = Widget.Revealer({
-    transition: "slide_left",
+    transition: options.notifications.popupTransition.value,
     transition_duration: options.transition.duration.value,
     child: eventBox,
   });

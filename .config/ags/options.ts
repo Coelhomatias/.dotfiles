@@ -28,7 +28,10 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
   notifications: {
     position: opt<Array<"top" | "bottom" | "left" | "right">>(["top", "right"]),
     blacklist: opt(["Spotify"]),
-    width: opt(440),
+    width: opt(300),
+    popupTimeout: opt(3000),
+    forceTimeout: opt(false),
+    popupTransition: opt<"slide_down" | "slide_up" | "slide_right" | "slide_left" | "crossfade" | "none">("slide_left")
   },
 });
 

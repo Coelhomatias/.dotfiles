@@ -1,12 +1,15 @@
+import options from "options";
 import NotificationItem from "./Notification";
 
 const notifications = await Service.import("notifications");
+notifications.popupTimeout = options.notifications.popupTimeout.value;
+notifications.forceTimeout = options.notifications.forceTimeout.value;
 
 const NotificationList = (monitor: number) => {
   return Widget.Window({
     monitor,
     name: `notification-list-${monitor}`,
-    class_name: "notification-list",
+    class_name: "notification-window",
     margins: [0, 0],
     exclusivity: "exclusive",
     anchor: ["top", "right"],
@@ -14,6 +17,7 @@ const NotificationList = (monitor: number) => {
       vertical: true,
       spacing: 10,
       css: "padding: 1px;",
+      class_name: "notification-list",
       setup: (self) =>
         self.hook(
           notifications,

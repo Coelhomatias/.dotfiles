@@ -1,24 +1,6 @@
-import { type Hints, Action } from "types/service/notifications";
-
 import NotificationItem from "./Notification";
-import { Notification } from "resource:///com/github/Aylur/ags/service/notifications.js";
 
 const notifications = await Service.import("notifications");
-
-const hint: Hints = {};
-
-const actions: string[] = ["Click", "Notification"];
-
-const notExample = new Notification(
-  "Teste App",
-  2,
-  "arch-symbolic",
-  "This is the title!",
-  "This is the body of a test notification",
-  actions,
-  hint,
-  true
-);
 
 const NotificationList = (monitor: number) => {
   return Widget.Window({
@@ -39,13 +21,10 @@ const NotificationList = (monitor: number) => {
             if (
               id == undefined ||
               notifications.dnd ||
-              notifications.notifications.length <= 0
+              notifications.popups.length <= 0
             )
               return;
-            console.log("heeeere");
-            // console.log(notifications.popups.map(NotificationItem));
             const n = notifications.getNotification(id)!;
-            console.log(n);
             self.children = [NotificationItem(n), ...self.children];
           },
           "notified"

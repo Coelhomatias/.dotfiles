@@ -97,19 +97,19 @@ const NotificationItem = (notification: Notification) => {
   const notificationActions =
     notification.actions.length > 0
       ? Widget.Revealer({
-          transition: "slide_down",
-          child: Widget.Box({
-            class_name: "actions",
-            children: notification.actions.map((action) =>
-              Widget.Button({
-                class_name: "action-button",
-                on_clicked: () => notification.invoke(action.id),
-                hexpand: true,
-                child: Widget.Label(action.label),
-              })
-            ),
-          }),
-        })
+        transition: "slide_down",
+        child: Widget.Box({
+          class_name: "actions",
+          children: notification.actions.map((action) =>
+            Widget.Button({
+              class_name: "action-button",
+              on_clicked: () => notification.invoke(action.id),
+              hexpand: true,
+              child: Widget.Label(action.label),
+            })
+          ),
+        }),
+      })
       : null;
 
   const eventBox = Widget.EventBox({
@@ -119,20 +119,20 @@ const NotificationItem = (notification: Notification) => {
       css: "background-color: rgba(255, 0, 0, 0.2)",
       children: notificationActions
         ? [
-            Widget.Box(
-              {},
-              NotificationIcon(notification),
-              NotificationContent(notification)
-            ),
-            notificationActions,
-          ]
+          Widget.Box(
+            {},
+            NotificationIcon(notification),
+            NotificationContent(notification)
+          ),
+          notificationActions,
+        ]
         : [
-            Widget.Box(
-              {},
-              NotificationIcon(notification),
-              NotificationContent(notification)
-            ),
-          ],
+          Widget.Box(
+            {},
+            NotificationIcon(notification),
+            NotificationContent(notification)
+          ),
+        ],
     }),
     on_primary_click: notification.dismiss,
     on_hover: () =>
@@ -140,59 +140,54 @@ const NotificationItem = (notification: Notification) => {
         ? (notificationActions.reveal_child = true)
         : undefined,
     on_hover_lost: () =>
-      notificationActions ? console.log("hover lost") : undefined,
+      console.log("hover lost"),
   });
 
-  const revealer = Widget.Revealer({
+  const innerRevealer = Widget.Revealer({
     transition: "slide_left",
     transition_duration: options.transition.duration.value,
     child: eventBox,
-    setup: (self) => {
-      self.hook(
-        notification,
-        () => {
-          if (notification.popup) return;
-          self.reveal_child = false;
-          console.log(
-            "Notification: ",
-            notification.summary,
-            " was dismissed, and popup is: ",
-            notification.popup
-          );
-          Utils.timeout(options.transition.duration.value, () =>
-            self.destroy()
-          );
-        },
-        "dismissed"
-      );
-      self.hook(
-        notification,
-        () => {
-          if (startup) {
-            startup = false;
-            return;
-          }
-          self.reveal_child = false;
-          console.log(
-            "Notification: ",
-            notification.summary,
-            " was closed, and popup is: ",
-            notification.popup
-          );
-          Utils.timeout(options.transition.duration.value, () =>
-            self.destroy()
-          );
-        },
-        "closed"
-      );
-    },
   });
 
-  Utils.idle(() => (revealer.reveal_child = true));
+  const outerRevealer = Widget.Revealer({
+    transition: "slide_down",
+    transition_duration: options.transition.duration.value,
+    child: innerRevealer,
+  });
+
+  Utils.idle(() => {
+    outerRevealer.reveal_child = true
+    Utils.timeout(options.transition.duration.value, () => {
+      innerRevealer.reveal_child = true
+    })
+  });
 
   return Widget.Box({
     css: "padding: 1px",
-    child: revealer,
+    child: outerRevealer,
+    hpack: "end",
+    setup: (self) => self.hook(notification, () => {
+      if (notification.popup) return;
+      innerRevealer.reveal_child = false;
+      Utils.timeout(options.transition.duration.value, () => {
+        outerRevealer.reveal_child = true;
+        Utils.timeout(options.transition.duration.value, () => {
+          self.destroy();
+        })
+      })
+    }, "dismissed").hook(notification, () => {
+      if (startup) {
+        startup = false;
+        return;
+      }
+      innerRevealer.reveal_child = false;
+      Utils.timeout(options.transition.duration.value, () => {
+        outerRevealer.reveal_child = true;
+        Utils.timeout(options.transition.duration.value, () => {
+          self.destroy();
+        })
+      })
+    }, "closed")
   });
 };
 

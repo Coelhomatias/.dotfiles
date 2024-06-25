@@ -140,7 +140,9 @@ const NotificationItem = (notification: Notification) => {
         ? (notificationActions.reveal_child = true)
         : undefined,
     on_hover_lost: () =>
-      console.log("hover lost"),
+      notificationActions
+        ? (notificationActions.reveal_child = false)
+        : undefined,
   });
 
   const innerRevealer = Widget.Revealer({

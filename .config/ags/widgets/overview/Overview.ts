@@ -38,5 +38,5 @@ export default () => PopupWindow({
     name: "overview",
     layout: "center-center",
     child: options.overview.workspaces.bind().as(Overview),
-    transition: "slide_down",
+    transition: "crossfade",
 })

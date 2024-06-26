@@ -49,10 +49,12 @@ const Revealer = ({ name, child, transition, layout }: MyRevealerProps) => {
     hpack: outterHPack,
     hexpand: false,
     vertical: false,
+    css: "background-color: rgba(255, 0, 0, 0.2);",
     setup: (self) =>
     (self[widgetLocation] = Widget.Revealer({
       hpack: innerHPack,
       vpack: innerVPack,
+      css: "background-color: rgba(0, 0, 255, 0.2);",
       transition: transition,
       transition_duration: options.transition.duration.bind(),
       visible: false,
@@ -60,7 +62,7 @@ const Revealer = ({ name, child, transition, layout }: MyRevealerProps) => {
       setup: (self) =>
         self.hook(App, (_, wname, visible) => {
           if (wname === name) self.reveal_child = visible;
-        }),
+        }, "window-toggled"),
     })),
   });
 };
@@ -78,7 +80,7 @@ const PopupWindow = ({
     exclusivity,
     visible: false,
     class_names: [name, "popup-window"],
-    layer: "overlay",
+    layer: "top",
     keymode: "on-demand",
     anchor: ["top", "bottom", "left", "right"],
     child: Revealer({ name, child, transition, layout }),

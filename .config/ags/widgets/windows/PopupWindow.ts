@@ -4,6 +4,7 @@ import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import options from "options";
 
 type Transition = RevealerProps["transition"];
+type Child = WindowProps["child"]
 type Layout =
   | "center-center"
   | "center-end"
@@ -19,11 +20,11 @@ type PopupWindowProps = Omit<WindowProps, "name" | "child"> & {
   name: string;
   layout?: Layout;
   transition?: Transition;
-  child: Gtk.Widget;
+  child: Child;
 };
 type MyRevealerProps = {
   name: string;
-  child: Gtk.Widget;
+  child: Child;
   transition: Transition;
   layout: Layout;
 };
@@ -49,18 +50,18 @@ const Revealer = ({ name, child, transition, layout }: MyRevealerProps) => {
     hexpand: false,
     vertical: false,
     setup: (self) =>
-      (self[widgetLocation] = Widget.Revealer({
-        hpack: innerHPack,
-        vpack: innerVPack,
-        transition: transition,
-        transition_duration: options.transition.duration.bind(),
-        visible: false,
-        child: child,
-        setup: (self) =>
-          self.hook(App, (_, wname, visible) => {
-            if (wname === name) self.reveal_child = visible;
-          }),
-      })),
+    (self[widgetLocation] = Widget.Revealer({
+      hpack: innerHPack,
+      vpack: innerVPack,
+      transition: transition,
+      transition_duration: options.transition.duration.bind(),
+      visible: false,
+      child: child,
+      setup: (self) =>
+        self.hook(App, (_, wname, visible) => {
+          if (wname === name) self.reveal_child = visible;
+        }),
+    })),
   });
 };
 

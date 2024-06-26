@@ -3,6 +3,7 @@ import Launcher from "widgets/launcher/Launcher";
 import { forMonitors } from "lib/utils";
 import NotificationList from "widgets/notifications/NotificationList";
 import options from "options";
+import Overview from "widgets/overview/Overview";
 
 App.config({
   icons: "./assets",
@@ -13,5 +14,6 @@ App.config({
     ...forMonitors(Bar),
     ...forMonitors(NotificationList),
     Launcher(),
+    Overview(),
   ],
 });

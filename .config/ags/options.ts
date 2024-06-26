@@ -33,6 +33,11 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
     forceTimeout: opt(false),
     popupTransition: opt<"slide_down" | "slide_up" | "slide_right" | "slide_left" | "crossfade" | "none">("slide_left")
   },
+  overview: {
+    scale: opt(9),
+    workspaces: opt(7),
+    monochromeIcon: opt(true),
+  },
 });
 
 globalThis["options"] = options;

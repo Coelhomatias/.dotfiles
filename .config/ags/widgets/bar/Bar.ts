@@ -1,6 +1,5 @@
 import { BoxProps } from "types/widgets/box";
 import options from "options";
-import OverviewButton from "widgets/overview/OverviewButton";
 import Workspaces from "./buttons/workspaces/Workspaces";
 import DateButton from "./buttons/date/DateButton";
 import SystemTray from "./buttons/tray/SystemTray";
@@ -8,11 +7,12 @@ import ButtonGroup from "./buttons/ButtonGroup";
 import VolumeButton from "./buttons/volume/VolumeButton";
 import BrightnessButton from "./buttons/brightness/BrightnessButton";
 import BatteryButton from "./buttons/battery/BatteryButton";
-import PowermenuButton from "widgets/powermenu/PowermenuButton";
+import PowermenuButton from "./buttons/powermenu/PowermenuButton";
+import LauncherButton from "./buttons/launcher/LauncherButton";
 
 /**
  *
- * Left: OverviewButton, Workspaces, SystemTray
+ * Left: LauncherButton, Workspaces, SystemIndicators, SystemTray
  * Center: NotificationIndicator, DateButton, PlayerInfo
  * Right: (ScreenRecorder, ColorPicker) (Network, Bluetooth, BTBatteryDevice) (MicrophoneIndicator, VolumeIndicator, BrightnessIndicator, BatteryIndicator), PowerButton
  *
@@ -26,7 +26,7 @@ const BarGroup = ({ class_name, ...rest }: BoxProps) =>
 
 const StartWidget = () =>
   BarGroup({
-    children: [OverviewButton(), Workspaces(7)],
+    children: [LauncherButton(), Workspaces(7)],
   });
 
 const CenterWidget = () =>

@@ -6,6 +6,8 @@ import icons from "lib/icons";
 const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
   transition: { duration: opt(250) },
   bar: {
+    position: opt<"top" | "bottom">("top"),
+    flatButtons: opt(true),
     date: {
       format: opt("%d %a %H:%M"),
     },
@@ -14,7 +16,18 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
     },
     powermenu: {
       icon: opt(icon("system-shutdown-symbolic"))
-    }
+    },
+    systray: {
+      ignore: opt([
+        "KDE Connect Indicator",
+        "spotify-client",
+      ]),
+    },
+    taskbar: {
+      iconSize: opt(0),
+      monochrome: opt(true),
+      exclusive: opt(false),
+    },
   },
   launcher: {
     sh: {

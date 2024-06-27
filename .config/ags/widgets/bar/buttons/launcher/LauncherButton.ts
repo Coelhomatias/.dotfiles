@@ -1,14 +1,14 @@
 import icons from "lib/icons";
 
-const OverviewButton = () =>
+const LauncherButton = () =>
 
     Widget.Button({
-        class_name: "overview-button",
+        class_name: "launcher-button",
         child: Widget.Icon({
             class_name: "icon",
             icon: icons.system.os
         }),
-        on_primary_click: () => App.toggleWindow("overview")
+        on_primary_click: () => App.toggleWindow("launcher")
     })
 
-export default OverviewButton;
+export default LauncherButton;

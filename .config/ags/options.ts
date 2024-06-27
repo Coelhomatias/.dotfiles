@@ -12,6 +12,9 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
     workspaces: {
       count: opt(20),
     },
+    powermenu: {
+      icon: opt(icon("system-shutdown-symbolic"))
+    }
   },
   launcher: {
     sh: {

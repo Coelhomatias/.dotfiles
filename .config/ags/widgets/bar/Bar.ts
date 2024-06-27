@@ -8,7 +8,7 @@ import ButtonGroup from "./buttons/ButtonGroup";
 import VolumeButton from "./buttons/volume/VolumeButton";
 import BrightnessButton from "./buttons/brightness/BrightnessButton";
 import BatteryButton from "./buttons/battery/BatteryButton";
-import PowerButton from "./buttons/power/PowerButton";
+import PowermenuButton from "widgets/powermenu/PowermenuButton";
 
 /**
  *
@@ -42,7 +42,7 @@ const EndWidget = () =>
       ButtonGroup({
         children: [VolumeButton(), BrightnessButton(), BatteryButton()],
       }),
-      PowerButton(),
+      PowermenuButton(),
     ],
   });
 

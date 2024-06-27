@@ -4,7 +4,7 @@ import { icon } from "lib/utils";
 import icons from "lib/icons";
 
 const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
-  transition: { duration: opt(2500) },
+  transition: { duration: opt(250) },
   bar: {
     date: {
       format: opt("%d %a %H:%M"),

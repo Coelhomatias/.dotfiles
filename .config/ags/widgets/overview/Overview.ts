@@ -2,11 +2,12 @@ import PopupWindow from "widgets/windows/PopupWindow"
 import Workspace from "./Workspace"
 import options from "options"
 import { range } from "lib/utils"
+import { Launcher } from "widgets/launcher/Launcher"
 
 const hyprland = await Service.import("hyprland")
 
 const Overview = (ws: number) => Widget.Box({
-    class_name: "overview horizontal",
+    class_name: "overview",
     children: ws > 0
         ? range(ws).map(Workspace)
         : hyprland.workspaces
@@ -34,9 +35,10 @@ const Overview = (ws: number) => Widget.Box({
     },
 })
 
-export default () => PopupWindow({
-    name: "overview",
-    layout: "center-center",
-    child: options.overview.workspaces.bind().as(Overview),
-    transition: "crossfade",
-})
+export default () =>
+    PopupWindow({
+        name: "overview",
+        child: options.overview.workspaces.bind().as(Overview),
+        layout: "center-center",
+        transition: "crossfade",
+    });

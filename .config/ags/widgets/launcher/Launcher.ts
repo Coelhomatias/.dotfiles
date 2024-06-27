@@ -1,6 +1,5 @@
 import icons from "lib/icons";
 import PopupWindow from "widgets/windows/PopupWindow";
-import Gtk from "gi://Gtk?version=3.0";
 import { newSearch } from "lib/search";
 import AppList from "./AppList";
 import { arrayToMap } from "lib/utils";
@@ -8,7 +7,7 @@ import { arrayToMap } from "lib/utils";
 const apps = await Service.import("applications");
 const { query } = apps;
 
-const Launcher = () => {
+export const Launcher = () => {
   const fuse = newSearch(query(""), { keys: ["name", "description"] });
   const appListMap = Variable(
     arrayToMap(query(""), "name", undefined, "value")

@@ -1,10 +1,10 @@
-import options from "options";
+import icons from "lib/icons";
 
 const PowermenuButton = () => Widget.Button({
     class_name: "powermenu-button",
     child: Widget.Icon({
         class_name: "icon",
-        icon: options.bar.powermenu.icon.value
+        icon: icons.powermenu.shutdown
     }),
     on_primary_click: () => App.toggleWindow("powermenu")
 })

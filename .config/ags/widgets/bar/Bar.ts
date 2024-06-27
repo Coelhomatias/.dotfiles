@@ -1,6 +1,6 @@
 import { BoxProps } from "types/widgets/box";
 import options from "options";
-import OverviewButton from "./buttons/overview/OverviewButton";
+import OverviewButton from "widgets/overview/OverviewButton";
 import Workspaces from "./buttons/workspaces/Workspaces";
 import DateButton from "./buttons/date/DateButton";
 import SystemTray from "./buttons/tray/SystemTray";

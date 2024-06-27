@@ -39,7 +39,7 @@ const options = mkOptions(Utils.CACHE_DIR + "/options.json", {
   overview: {
     scale: opt(9),
     workspaces: opt(7),
-    monochromeIcon: opt(true),
+    monochromeIcon: opt(false),
   },
 });
 

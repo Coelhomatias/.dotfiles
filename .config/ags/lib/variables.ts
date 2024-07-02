@@ -50,7 +50,7 @@ export const cpu = Variable(0, {
 
       const cpu = cpuLine.split(",");
       const cpuUsage = cpu[3].split(" ")[1];
-      return (100.0 - Number.parseFloat(cpuUsage)).toFixed(1);
+      return 100.0 - Number.parseFloat(cpuUsage);
     }
   ],
 });
@@ -64,7 +64,7 @@ export const ram = Variable(0, {
       if (!line) return 0;
 
       const [total, used] = line.split(/\s+/).splice(1, 2);
-      return (divide([total, used]) * 100).toFixed(1);
+      return divide([total, used]) * 100;
     },],
 });
 

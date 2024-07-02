@@ -50,7 +50,7 @@ export async function sh(cmd: string | string[]) {
   });
 }
 
-export const zeroPad = (num: number, places: number) =>
+export const zeroPad = (num: number | string, places: number) =>
   String(num).padStart(places, "0");
 
 export function forMonitors(widget: (monitor: number) => Gtk.Window) {

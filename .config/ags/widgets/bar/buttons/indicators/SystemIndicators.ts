@@ -1,4 +1,5 @@
 import icons from "lib/icons";
+import { zeroPad } from "lib/utils";
 import { cpu, ram, temperature, freeSpace } from "lib/variables";
 
 const CPUIndicator = () => Widget.Box({
@@ -10,7 +11,7 @@ const CPUIndicator = () => Widget.Box({
         }),
         Widget.Label({
             class_name: "label",
-            label: cpu.bind().as(value => `${value}%`)
+            label: cpu.bind().as(value => `${value.toFixed(1)}%`)
         })
     ],
 
@@ -25,7 +26,7 @@ const RAMIndicator = () => Widget.Box({
         }),
         Widget.Label({
             class_name: "label",
-            label: ram.bind().as(value => `${value}%`)
+            label: ram.bind().as(value => `${value.toFixed(1)}%`)
         })
     ],
 
@@ -51,7 +52,7 @@ const FreeSpaceIndicator = () => Widget.Box({
     children: [
         Widget.Icon({
             class_name: "icon",
-            icon: icons.system.cpu
+            icon: icons.system.freeSpace
         }),
         Widget.Label({
             class_name: "label",
@@ -60,6 +61,7 @@ const FreeSpaceIndicator = () => Widget.Box({
     ],
 
 })
+
 
 const SystemIndicators = () => {
     return Widget.Box({

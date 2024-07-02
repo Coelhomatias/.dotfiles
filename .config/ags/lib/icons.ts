@@ -138,9 +138,10 @@ export default {
     next: "media-skip-forward-symbolic",
   },
   system: {
-    cpu: "org.gnome.SystemMonitor-symbolic",
-    ram: "drive-harddisk-solidstate-symbolic",
-    temp: "temperature-symbolic",
+    cpu: "processor-symbolic",
+    ram: "memory-symbolic",
+    temp: "thermometer-symbolic",
+    freeSpace: "ssd-symbolic",
     os: "arch-symbolic",
   },
   color: {

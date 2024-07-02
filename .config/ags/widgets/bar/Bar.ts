@@ -9,6 +9,7 @@ import BrightnessButton from "./buttons/brightness/BrightnessButton";
 import BatteryButton from "./buttons/battery/BatteryButton";
 import PowermenuButton from "./buttons/powermenu/PowermenuButton";
 import LauncherButton from "./buttons/launcher/LauncherButton";
+import SystemIndicators from "./buttons/indicators/SystemIndicators";
 
 /**
  *
@@ -26,7 +27,7 @@ const BarGroup = ({ class_name, ...rest }: BoxProps) =>
 
 const StartWidget = () =>
   BarGroup({
-    children: [LauncherButton(), Workspaces(7)],
+    children: [LauncherButton(), Workspaces(7), SystemIndicators()],
   });
 
 const CenterWidget = () =>

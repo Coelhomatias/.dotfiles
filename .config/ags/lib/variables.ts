@@ -5,6 +5,7 @@ import GLib from "gi://GLib";
 // const tempPath = options.system.temperature.value
 
 const intval = 2000;
+const intvalSec = Math.round(intval / 1000);
 
 export const clock = Variable(GLib.DateTime.new_now_local(), {
   poll: [1000, () => GLib.DateTime.new_now_local()],
@@ -26,31 +27,15 @@ export const distro = {
 const divide = ([total, free]: string[]) =>
   Number.parseInt(free) / Number.parseInt(total);
 
-// export const downspeed = Variable(0, {
-//   poll: [
-//     intval,
-//     "ifstat -t 2 -j",
-//     (out) => {
-//       const data = JSON.parse(out);
-//       const interfaces = Object.keys(data.kernel);
-
-//       return 0;
-//     },
-//   ],
-// });
 
 export const cpu = Variable(0, {
   poll: [
     intval,
-    "top -bn1",
+    `mpstat ${intvalSec} 1 -o JSON`,
     (output) => {
-      const lines = output.split("\n");
-      const cpuLine = lines.find((line) => line.startsWith("%Cpu(s):"));
-      if (!cpuLine) return 0;
-
-      const cpu = cpuLine.split(",");
-      const cpuUsage = cpu[3].split(" ")[1];
-      return 100.0 - Number.parseFloat(cpuUsage);
+      const data = JSON.parse(output);
+      const cpu = data.sysstat.hosts[0].statistics[0]["cpu-load"][0].usr as number;
+      return cpu;
     }
   ],
 });
@@ -77,7 +62,7 @@ export const temperature = Variable(0, {
       if (!line) return 0;
 
       const temp = line.split(/\s+/)[3].slice(1, -2);
-      return Number.parseInt(temp);
+      return Number.parseFloat(temp);
     },
   ],
 });
@@ -89,13 +74,3 @@ export const freeSpace = Variable([0, 0], {
     (out) => out.split("\n")[1].split(/\s+/).slice(3, 5).map((n) => Number.parseInt(n.slice(0, -1))),
   ],
 });
-
-// export const freeSpacePercent = Variable(0, {
-//   poll: [
-//     intval,
-//     "df -h / | awk 'NR==2 {print 100-$5}' | tr -d '%'",
-//     (n) => {
-//       return Number.parseInt(n);
-//     },
-//   ],
-// });

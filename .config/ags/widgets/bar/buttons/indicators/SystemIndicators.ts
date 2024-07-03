@@ -11,7 +11,7 @@ const CPUIndicator = () => Widget.Box({
         }),
         Widget.Label({
             class_name: "label",
-            label: cpu.bind().as(value => `${value.toFixed(1)}%`)
+            label: cpu.bind().as(value => `${Math.round(value)}%`)
         })
     ],
 
@@ -26,7 +26,7 @@ const RAMIndicator = () => Widget.Box({
         }),
         Widget.Label({
             class_name: "label",
-            label: ram.bind().as(value => `${value.toFixed(1)}%`)
+            label: ram.bind().as(value => `${Math.round(value)}%`)
         })
     ],
 
@@ -41,7 +41,7 @@ const TemperatureIndicator = () => Widget.Box({
         }),
         Widget.Label({
             class_name: "label",
-            label: temperature.bind().as(value => `${value}°C`)
+            label: temperature.bind().as(value => `${Math.round(value)}°C`)
         })
     ],
 

@@ -1,3 +1,5 @@
+source=~/.config/hypr/mocha.conf
+
 # This is an example Hyprland config file.
 # Refer to the wiki for more information.
 # https://wiki.hyprland.org/Configuring/Configuring-Hyprland/
@@ -8,7 +10,6 @@
 # You can split this configuration into multiple files
 # Create your files separately and then link them to this file like this:
 # source = ~/.config/hypr/myColors.conf
-source=~/.config/hypr/mocha.conf
 
 
 ################
@@ -16,7 +17,8 @@ source=~/.config/hypr/mocha.conf
 ################
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=,preferred,auto,auto
+monitor = LVDS-1, 1366x768, 0x0, 1
+monitor = HDMI-A-1, 2560x1080, 1366x0, 1
 
 
 ###################
@@ -28,8 +30,11 @@ monitor=,preferred,auto,auto
 # Set programs that you use
 $terminal = footclient
 $fileManager = thunar
-$menu = sysmenu
-
+$menu = ags -t launcher -b hypr
+$overview = ags -t overview -b hypr
+$powermenu = ags -t powermenu -b hypr
+$reload = ags -q -b hypr ; ags -b hypr
+$test = ags -t quicksettings -b hypr
 
 #################
 ### AUTOSTART ###
@@ -38,12 +43,14 @@ $menu = sysmenu
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = foot --server &
-exec-once = gBar &
-exec-once = nm-applet &
-exec-once = swaync &
-exec-once = hypridle &
+# exec-once = $terminal
+# exec-once = nm-applet &
 # exec-once = waybar & hyprpaper & firefox
+exec-once = hyprctl setcursor catppuccin-mocha-dark-cursors 24
+exec-once = ags -b hypr &
+exec-once = foot --server &
+exec-once = nm-applet &
+exec-once = blueman-applet &
 
 
 #############################
@@ -55,7 +62,6 @@ exec-once = hypridle &
 env = XCURSOR_SIZE,24
 env = XCURSOR_THEME,catppuccin-mocha-dark-cursors
 env = HYPRCURSOR_SIZE,24
-env = HYPRCURSOR_THEME,catppuccin-mocha-dark-cursors
 env = QT_QPA_PLATFORM,wayland
 env = XDG_CURRENT_DESKTOP,Hyprland
 
@@ -69,7 +75,7 @@ env = XDG_CURRENT_DESKTOP,Hyprland
 # https://wiki.hyprland.org/Configuring/Variables/#general
 general { 
     gaps_in = 5
-    gaps_out = 20
+    gaps_out = 10
 
     border_size = 2
 
@@ -102,8 +108,8 @@ decoration {
     # https://wiki.hyprland.org/Configuring/Variables/#blur
     blur {
         enabled = true
-        size = 3
-        passes = 1
+        size = 6
+        passes = 3
         
         vibrancy = 0.1696
     }
@@ -111,7 +117,7 @@ decoration {
 
 # https://wiki.hyprland.org/Configuring/Variables/#animations
 animations {
-    enabled = true
+    enabled = false
 
     # Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
@@ -132,9 +138,9 @@ dwindle {
 }
 
 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-master {
-    new_status = master
-}
+# master {
+#     new_is_master = true
+# }
 
 # https://wiki.hyprland.org/Configuring/Variables/#misc
 misc { 
@@ -176,16 +182,18 @@ device {
     sensitivity = -0.5
 }
 
+debug:disable_logs = false
 
-###################
-### KEYBINDINGS ###
-###################
+####################
+### KEYBINDINGSS ###
+####################
 
 # See https://wiki.hyprland.org/Configuring/Keywords/
 $mainMod = SUPER # Sets "Windows" key as main modifier
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = $mainMod, Q, exec, $terminal
+bind = $mainMod, O, exec, $test
 bind = $mainMod, C, killactive,
 bind = $mainMod, M, exit,
 bind = $mainMod, E, exec, $fileManager
@@ -193,6 +201,24 @@ bind = $mainMod, V, togglefloating,
 bind = $mainMod, R, exec, $menu
 bind = $mainMod, P, pseudo, # dwindle
 bind = $mainMod, J, togglesplit, # dwindle
+bind = $mainMod SHIFT, R, exec, $reload
+bind = ,XF86PowerOff,  exec, $powermenu
+bind = $mainMod, Tab,  exec, $overview
+
+binde = ,XF86MonBrightnessDown, exec, brightnessctl set 5%-
+binde = ,XF86MonBrightnessUp, exec, brightnessctl set 5%+
+
+bind = , xf86KbdBrightnessUp, exec, brightnessctl -d *::kbd_backlight set +33%
+bind = , xf86KbdBrightnessDown, exec, brightnessctl -d *::kbd_backlight set 33%-
+
+bind = ,XF86AudioMute, exec, pamixer -t
+binde = ,XF86AudioLowerVolume, exec, pamixer -d 5
+binde = ,XF86AudioRaiseVolume, exec, pamixer -i 5
+
+bind = , XF86AudioPlay, exec, playerctl play-pause
+bind = , XF86AudioNext, exec, playerctl next
+bind = , XF86AudioPrev, exec, playerctl previous
+bind = , XF86audiostop, exec, playerctl stop
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l

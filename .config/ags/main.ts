@@ -1,26 +1,41 @@
-import Bar from "widgets/bar/Bar";
-import Launcher from "widgets/launcher/Launcher";
-import Overview from "widgets/overview/Overview";
-import { forMonitors } from "lib/utils";
-import NotificationList from "widgets/notifications/NotificationList";
-import options from "options";
-import Powermenu from "widgets/powermenu/Powermenu";
-import QuickSettings from "widgets/quicksettings/QuickSettings";
+import "lib/session"
+import "style/style"
+import init from "lib/init"
+import options from "options"
+import Bar from "widget/bar/Bar"
+import Launcher from "widget/launcher/Launcher"
+import NotificationPopups from "widget/notifications/NotificationPopups"
+import OSD from "widget/osd/OSD"
+import Overview from "widget/overview/Overview"
+import PowerMenu from "widget/powermenu/PowerMenu"
+import ScreenCorners from "widget/bar/ScreenCorners"
+import SettingsDialog from "widget/settings/SettingsDialog"
+import Verification from "widget/powermenu/Verification"
+import { forMonitors } from "lib/utils"
+import { setupQuickSettings } from "widget/quicksettings/QuickSettings"
+import { setupDateMenu } from "widget/datemenu/DateMenu"
 
 App.config({
-  icons: "./assets",
-  closeWindowDelay: {
-    launcher: options.transition.duration.value,
-    overview: options.transition.duration.value,
-    powermenu: options.transition.duration.value,
-    quicksettings: options.transition.duration.value
-  },
-  windows: () => [
-    ...forMonitors(Bar),
-    ...forMonitors(NotificationList),
-    QuickSettings(),
-    Overview(),
-    Launcher(),
-    Powermenu()
-  ],
-});
+    onConfigParsed: () => {
+        setupQuickSettings()
+        setupDateMenu()
+        init()
+    },
+    closeWindowDelay: {
+        "launcher": options.transition.value,
+        "overview": options.transition.value,
+        "quicksettings": options.transition.value,
+        "datemenu": options.transition.value,
+    },
+    windows: () => [
+        ...forMonitors(Bar),
+        ...forMonitors(NotificationPopups),
+        ...forMonitors(ScreenCorners),
+        ...forMonitors(OSD),
+        Launcher(),
+        Overview(),
+        PowerMenu(),
+        SettingsDialog(),
+        Verification(),
+    ],
+})

@@ -51,22 +51,22 @@ const options = mkOptions(OPTIONS, {
 
         shadows: opt(true),
         padding: opt(7),
-        spacing: opt(12),
+        spacing: opt(5),
         radius: opt(11),
     },
 
-    transition: opt(200),
+    transition: opt(100),
 
     font: {
-        size: opt(10),
+        size: opt(11),
         name: opt("JuliaMono Nerd Font Mono"),
     },
 
     bar: {
-        flatButtons: opt(true),
+        flatButtons: opt(false),
         position: opt<"top" | "bottom">("top"),
         corners: opt(50),
-        transparent: opt(false),
+        transparent: opt(true),
         layout: {
             start: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "launcher",
@@ -105,7 +105,7 @@ const options = mkOptions(OPTIONS, {
             action: opt(() => App.toggleWindow("datemenu")),
         },
         battery: {
-            bar: opt<"hidden" | "regular" | "whole">("regular"),
+            bar: opt<"hidden" | "regular" | "whole">("hidden"),
             charging: opt("#00D787"),
             percentage: opt(true),
             blocks: opt(7),
@@ -158,7 +158,7 @@ const options = mkOptions(OPTIONS, {
             favorites: opt([
                 [
                     "firefox",
-                    "wezterm",
+                    "footclient",
                     "org.gnome.Nautilus",
                     "org.gnome.Calendar",
                     "spotify",
@@ -235,7 +235,7 @@ const options = mkOptions(OPTIONS, {
     hyprland: {
         gaps: opt(2.4),
         inactiveBorder: opt("#282828"),
-        gapsWhenOnly: opt(false),
+        gapsWhenOnly: opt(true),
     },
 })
 

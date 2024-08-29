@@ -5,8 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Created by newuser for 5.8.1
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"
+alias cd="z"
 
 # history setup
 HISTFILE=$HOME/.zhistory
@@ -20,19 +24,6 @@ setopt hist_verify
 # completion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
-
-# Sourcing zsh plugins
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
-
-export PATH="$HOME/.local/bin/:$PATH"
-export PATH="/usr/bin/:$PATH"
-
-# ---- FZF -----
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
 
 # -- Use fd instead of fzf --
 
@@ -83,18 +74,6 @@ _fzf_comprun() {
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-alias cd="z"
-
-
-alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-alias discord="discord --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-alias obsidian="obsidian --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-# alias skypeforlinux="skypeforlinux --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-# alias teams-for-linux="teams-for-linux --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-# alias teams-for-linux-wayland-hook="teams-for-linux-wayland-hook --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
-
 
 
 # >>> conda initialize >>>
@@ -111,11 +90,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+source /home/linuxbrew/.linuxbrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
-
-# bun completions
-[ -s "/home/coelhomatias/.bun/_bun" ] && source "/home/coelhomatias/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

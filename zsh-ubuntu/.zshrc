@@ -30,6 +30,8 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
+export EDITOR="nvim"
+
 # -- Use fd instead of fzf --
 
 export FZF_DEFAULT_COMMAND="fd --min-depth=1 --max-depth=2 --hidden --strip-cwd-prefix --exclude .git"

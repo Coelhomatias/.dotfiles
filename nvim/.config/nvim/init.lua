@@ -1,2 +1,2 @@
-require("coelhomatias.core")
-require("coelhomatias.lazy")
+require("core")
+require("config.lazy")

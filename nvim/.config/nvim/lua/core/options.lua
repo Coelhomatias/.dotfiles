@@ -24,3 +24,5 @@ opt.signcolumn = "yes" 		-- show sign column so that text doesn't shift
 
 opt.splitright = true	-- split vertical window to the right
 opt.splitbelow = true	-- split horizontal window to the bottom
+
+opt.scrolloff = 10    -- scroll offset

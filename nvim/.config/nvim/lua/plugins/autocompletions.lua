@@ -1,6 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter", "CmdlineEnter" },
+  event =  "InsertEnter", -- add CmdlineEnter for cmdline completions
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "FelipeLema/cmp-async-path", -- source for file system paths
@@ -48,7 +48,7 @@ return {
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
-        -- { name = "nvim_lsp"},
+        { name = "nvim_lsp"},
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "async_path" }, -- file system paths

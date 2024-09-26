@@ -9,3 +9,9 @@ fi
 if [ -f $HOME/.config/zsh/main.zsh ]; then
     source $HOME/.config/zsh/main.zsh
 fi
+
+# BEGIN ANSIBLE MANAGED BLOCK: nvm initialization
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# END ANSIBLE MANAGED BLOCK: nvm initialization

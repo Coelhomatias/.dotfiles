@@ -14,8 +14,8 @@ setopt HIST_IGNORE_ALL_DUPS     # Remove all previous duplicates
 setopt HIST_EXPIRE_DUPS_FIRST   # Expire duplicate entries first when trimming history
 setopt HIST_VERIFY              # Show command with history expansion before executing
 
-bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
-bindkey "${terminfo[kcud1]}" history-beginning-search-forward
+bindkey "${terminfo[kcuu1]}" history-search-backward
+bindkey "${terminfo[kcud1]}" history-search-forward
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'

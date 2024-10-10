@@ -8,7 +8,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # Paths
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/cuda-12.6/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH"
 
 # FZF Configuration
 export FZF_DEFAULT_COMMAND="fd --min-depth=1 --max-depth=2 --hidden --strip-cwd-prefix --exclude .git"

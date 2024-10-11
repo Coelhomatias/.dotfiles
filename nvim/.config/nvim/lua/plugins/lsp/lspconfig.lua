@@ -135,7 +135,8 @@ return {
 						basedpyright = {
 							analysis = {
 								-- set typeCheckingMode to standard
-								typeCheckingMode = "standard",
+								typeCheckingMode = "off",
+								ignore = { "*" },
 							},
 							disableOrganizeImports = true,
 							-- disableLanguageServices = true,
